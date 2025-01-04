@@ -12,7 +12,7 @@ export class TasksService {
   getAllTasksFilter(getTasksFilterDto: GetTasksFilterDto): Task[] {
     const { search, status } = getTasksFilterDto;
 
-    let newTasks = [...this.tasks];
+    let newTasks = this.getAllTasks();
 
     if (status) {
       newTasks = newTasks.filter((task) => task.status === status);
@@ -28,7 +28,7 @@ export class TasksService {
 
   updateTask(updateTaskDto: UpdateTaskDto, id: string): Task {
     const { title, description, status } = updateTaskDto;
-    console.log('ASDASD', title, description, status);
+
     const task = this.getTaskById(id);
 
     task.description = description || task.description;
