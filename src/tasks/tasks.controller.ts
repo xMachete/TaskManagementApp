@@ -26,6 +26,11 @@ export class TasksController {
   //   return this.taskService.getAllTasks();
   // }
 
+  @Get()
+  getAllTasks(): Promise<Task[]> {
+    return this.taskService.getAllTasks();
+  }
+
   @Post()
   createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
     return this.taskService.createTask(createTaskDto);
@@ -40,12 +45,12 @@ export class TasksController {
   // deleteTask(@Param('id') id: string): void {
   //   this.taskService.deleteTask(id);
   // }
-
+  //** */
   // @Patch('/:id')
   // updateTask(
   //   @Body() updateTaskDto: UpdateTaskDto,
   //   @Param('id') id: string,
-  // ): Task {
+  // ): Promise<Task> {
   //   return this.taskService.updateTask(updateTaskDto, id);
   // }
 }

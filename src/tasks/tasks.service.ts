@@ -31,12 +31,19 @@ export class TasksService {
   //   }
   //   return newTasks;
   // }
-  // updateTask(updateTaskDto: UpdateTaskDto, id: string): Task {
+  //** */
+  // async updateTask(updateTaskDto: UpdateTaskDto, id: string): Promise<Task> {
   //   const { title, description, status } = updateTaskDto;
+
+  //   const newTask = this.tasksRepository.update(id, {
+  //     title,
+  //     description,
+  //     status,
+  //   });
+  //   await this.tasksRepository.save(newTask);
+
   //   const task = this.getTaskById(id);
-  //   task.description = description || task.description;
-  //   task.title = title || task.title;
-  //   task.status = status || task.status;
+
   //   return task;
   // }
   // deleteTask(id: string): void {
@@ -54,27 +61,11 @@ export class TasksService {
     return found;
   }
 
-  // getAllTasks(): Task[] {
-  //   return this.tasks;
-  // }
+  getAllTasks(): Promise<Task[]> {
+    return this.tasksRepository.find();
+  }
 
-  async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
-    const { description, title } = createTaskDto;
-
-    const newTask = {
-      description,
-      title,
-      status: TaskStatus.OPEN,
-    };
-
-    const task = this.tasksRepository.create({
-      description,
-      title,
-      status: TaskStatus.OPEN,
-    });
-
-    await this.tasksRepository.save(task);
-
-    return task;
+  createTask(createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.tasksRepository.createTask(createTaskDto);
   }
 }
